@@ -1,17 +1,6 @@
 import { useEffect, useState } from 'react';
-import { formatBytes } from '../helpers/misc';
-// import cat from '../assets/cat.png';
 
-const getMemory = (): Performance['memory'] | undefined => {
-  const { memory } = window.performance;
-  if (memory === undefined) {
-    console.error('Unable to fetch window.performance.memory!');
-  }
-
-  return memory;
-};
-
-const Demo = (): JSX.Element => {
+const NestedComponentWithFetchDemo = (): JSX.Element => {
   const [counter, setCounter] = useState(0);
   const incrementCounter = () => setCounter((current) => current + 1);
 
@@ -34,8 +23,8 @@ const Demo = (): JSX.Element => {
     return (
       <div
         style={{
-          width: '800px',
-          maxWidth: '100%',
+          width: '600px',
+          maxWidth: 'calc(100vw - 30px)',
           margin: '0 auto',
           textAlign: 'left',
           border: '1px solid white',
@@ -70,53 +59,34 @@ const Demo = (): JSX.Element => {
     );
   };
 
-  // const [memory, setMemory] = useState(getMemory());
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setMemory(getMemory());
-  //   }, 500);
-
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
-
-  const { usedJSHeapSize, totalJSHeapSize } = getMemory() || {};
-
   return (
-    <div>
+    <div
+      style={{
+        width: '600px',
+        maxWidth: 'calc(100vw - 30px)',
+        margin: '0 auto',
+        textAlign: 'left',
+      }}
+    >
       <InnerComponent />
       <p>
         Clicking this button will update some state and cause a re-render.
         <br />
-        <button type="button" onClick={incrementCounter}>
+        <button
+          type="button"
+          onClick={incrementCounter}
+          style={{ margin: '10px 0', display: 'block' }}
+        >
           Update state
-        </button>
-        <br />
+        </button>{' '}
         State: {counter}
       </p>
-
-      <div
-        style={{
-          width: '800px',
-          maxWidth: '100%',
-          margin: '0 auto',
-          textAlign: 'left',
-        }}
-      >
+      <p>
         This, in turn, will cause the nested declaration of the component that
         renders the above image to be re-created.
-        <br />
-        <br />
-        {usedJSHeapSize !== undefined && (
-          <div>usedJSHeapSize: {formatBytes(usedJSHeapSize)}</div>
-        )}
-        {totalJSHeapSize !== undefined && (
-          <div>totalJSHeapSize: {formatBytes(totalJSHeapSize)}</div>
-        )}
-      </div>
+      </p>
     </div>
   );
 };
 
-export default Demo;
+export default NestedComponentWithFetchDemo;
