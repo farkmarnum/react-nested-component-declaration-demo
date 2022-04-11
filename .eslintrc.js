@@ -7,6 +7,7 @@ module.exports = {
     'airbnb',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -22,7 +23,10 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-console': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'react/function-component-definition': 'off',
     'react/react-in-jsx-scope': 'off', // suppress errors for missing 'import React' in files (React 17+)
+
+    'react/no-unstable-nested-components': 'off', // suppress this error since it's part of the demo
   },
   overrides: [
     {
