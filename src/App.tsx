@@ -3,7 +3,7 @@ import Demo from './components/Demo';
 import Warning from './components/Warning';
 import './App.css';
 
-const App = () => {
+function App() {
   return (
     <div className="App">
       <header className="App-header">
